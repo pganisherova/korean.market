@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirish</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="containner">
+        <div class="login_form">
+            <input type="text" class="reg_login" placeholder="Login">
+            <input type="password" class="reg_password" placeholder="Parol">
+            <button onclick="login()">Kirish</button>
+            <a href="register.html">Menda akkaunt yo‘q</a>
+        </div>
+    </div>
+
+
+
+
+<!-- login.html -->
+<button onclick="login()">Kirish</button>
+
+
+
+
+<script>
+function login() {
+  const loginInput = document.querySelector(".reg_login").value.trim();
+  const passInput = document.querySelector(".reg_password").value;
+
+
+
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+
+
+
+  const found = users.find(u => u.login === loginInput && u.password === passInput);
+
+
+
+
+  if (found) {
+    alert(`Xush kelibsiz, ${found.fullname}!`);
+    // kerak bo'lsa foydalanuvchini "session" kabi belgilash:
+    localStorage.setItem("currentUser", JSON.stringify(found));
+    window.location.href = "index.html";
+  } else {
+    alert("Login yoki parol noto'g'ri!");
+  }
+}
+</script>
+
+
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan o'tish</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="containner">
+        <div class="register_form">
+            <input type="text" class="reg_fullname" placeholder="To'liq ismingiz">
+            <input type="tel" class="reg_phone" placeholder="Telefon raqam">
+            <input type="text" class="reg_login" placeholder="Login">
+            <input type="password" class="reg_password" placeholder="Parol">
+            <button id="registerBtn">Ro'yxatdan o'tish</button>
+            <a href="login.html">Menda akkaunt bor</a>
+        </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector("#registerBtn");
+  const fullname = document.querySelector(".reg_fullname");
+  const phone = document.querySelector(".reg_phone");
+  const login = document.querySelector(".reg_login");
+  const password = document.querySelector(".reg_password");
+
+
+
+
+  btn.addEventListener("click", () => {
+    if (!fullname.value || !login.value || !password.value) {
+      alert("Iltimos, barcha maydonlarni to'ldiring!");
+      return;
+    }
+
+
+
+
+    // users massivini olish yoki bo'sh massiv
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+
+
+
+    // Login takrorlanishini tekshirish
+    const exists = users.find(u => u.login === login.value.trim());
+    if (exists) {
+      alert("Bu login allaqachon mavjud. Iltimos, boshqa login tanlang.");
+      return;
+    }
+
+
+
+
+    const user = {
+      fullname: fullname.value.trim(),
+      phone: phone.value.trim(),
+      login: login.value.trim(),
+      password: password.value // demo uchun; haqiqiy loyihada parolni shifrlash kerak
+    };
+
+
+
+
+    // TO'G'RI: users.push(user)
+    users.push(user);
+
+
+
+
+    // Saqlash
+    localStorage.setItem("users", JSON.stringify(users));
+
+
+
+
+    alert(`Xush kelibsiz, ${user.fullname}!`);
+    window.location.href = "index.html";
+  });
+});
+        </script>
+</body>
+</html>
+
+
+
+
